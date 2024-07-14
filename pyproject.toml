@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "messages-cleaner"
+version = "1.0.0"
+description = "Clean-up redundant messages in Telegram chats."
+authors = ["Eldos <eldos.baktybekov@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "messages_cleaner"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+httpx = "^0.27.0"
+redis = "^5.0.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
