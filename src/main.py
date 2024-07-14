@@ -1,42 +1,13 @@
 import time
-from collections import defaultdict
-from collections.abc import Iterable
-from dataclasses import dataclass
 
 import redis
 
 from config import load_config
 from logger import get_logger, setup_logger
+from parsers import group_by_chat_id, parse_messages
 from telegram import TelegramBot, get_telegram_bot_http_client
 
 logger = get_logger('app')
-
-
-@dataclass(frozen=True, slots=True)
-class Message:
-    id: int
-    chat_id: int
-
-
-def group_by_chat_id(messages: Iterable[Message]) -> dict[int, list[Message]]:
-    messages_by_chat_id: defaultdict[int, list[Message]] = defaultdict(list)
-    for message in messages:
-        messages_by_chat_id[message.chat_id].append(message)
-    return dict(messages_by_chat_id)
-
-
-def parse_messages(elements: Iterable[str]) -> list[Message]:
-    messages: list[Message] = []
-
-    for element in elements:
-        chat_id, message_id = element.split(':')
-
-        chat_id = int(chat_id)
-        message_id = int(message_id)
-
-        messages.append(Message(chat_id=chat_id, id=message_id))
-
-    return messages
 
 
 def main() -> None:
