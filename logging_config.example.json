@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "stdout": {
+      "format": "%(asctime)s\t| %(name)s\t| %(levelname)s\t| %(message)s ",
+      "class": "logging.Formatter"
+    }
+  },
+  "handlers": {
+    "stdout": {
+      "class": "logging.StreamHandler",
+      "stream": "ext://sys.stdout",
+      "formatter": "stdout"
+    }
+  },
+  "loggers": {
+    "telegram": {
+      "handlers": [
+        "stdout"
+      ],
+      "level": "DEBUG"
+    },
+    "app": {
+      "handlers": [
+        "stdout"
+      ],
+      "level": "DEBUG"
+    }
+  }
+}
